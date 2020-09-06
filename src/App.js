@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import TodoContainer from './Components/TodoContainer';
+
+
+const styles = {
+	wrapper: {
+		width: '1000px',
+		margin: '0 auto'
+	},
+	h1: {
+		textAlign: 'center'
+	}
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div style={styles.wrapper}>
+			<h1 style={styles.h1}>Список дел</h1>
+			<TodoContainer />
+		</div>
+	);
 }
 
 export default App;
