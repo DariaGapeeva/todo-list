@@ -1,5 +1,6 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { required } from '../../utilities/validators';
 
 const styles = {
 	div: {
@@ -12,7 +13,12 @@ const styles = {
 		marginBottom: '10px'
 	},
 	input: {
-		marginLeft: 20
+		marginLeft: 20,
+		border: '1px solid grey',
+		borderRadius: 5,
+		height: 20,
+		width: 300
+
 	},
 	button: {
 		borderRadius: 5,
@@ -25,7 +31,7 @@ const styles = {
 const AddTodo = (props) => {
 	return (
 		<form onSubmit={props.handleSubmit} style={styles.div}>
-			<Field component='input' style={styles.input} type="text" />
+			<Field component='input' style={styles.input} type="text" name="task" validate={required} />
 			<button style={styles.button}>Добавить</button>
 		</form>
 

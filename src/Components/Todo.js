@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TodoItem from './TodoItem/TodoItem';
+import AddTodoFormRedux from './AddTodo/AddTodo'
+
 
 const styles = {
 	ol: {
@@ -16,7 +18,7 @@ const Todo = (props) => {
 					<TodoItem key={item.id} id={props.todos.indexOf(item) + 1} todos={item} deleteTask={props.deleteTask} checked={props.checked} />
 				))}
 			</ol>
-
+			<AddTodoFormRedux onSubmit={(formData) => props.addTask(formData.task)} />
 		</div>
 	)
 }

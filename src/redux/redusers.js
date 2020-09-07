@@ -21,7 +21,8 @@ export const todoReduser = (state = initialState, action) => {
 				done: false
 			}
 			return {
-				...state, newTask
+				...state,
+				todos: [...state.todos, newTask]
 			}
 		}
 		case DELETE_TASK: {

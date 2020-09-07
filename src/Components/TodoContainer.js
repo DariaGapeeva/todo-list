@@ -13,7 +13,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		addTask: (task) => (dispatch(addTaskAC(task))),
 		deleteTask: (id) => (dispatch(deleteTaskAC(id))),
-		checked: (id) => (dispatch(checkedAC(id)))
+		checked: (id) => (dispatch(checkedAC(id))),
+
 	}
 }
 
