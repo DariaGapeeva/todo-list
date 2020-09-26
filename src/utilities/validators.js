@@ -1,1 +1,1 @@
-export const required = (formData) => (formData ? undefined : 'где задача?')  
+export const required = (formData) => (formData ? undefined : ' ')  

@@ -1,6 +1,7 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, reset } from 'redux-form';
 import { required } from '../../utilities/validators';
+import { Input } from '../common/form';
 
 const styles = {
 	div: {
@@ -10,15 +11,7 @@ const styles = {
 		border: '1px solid green',
 		borderRadius: 5,
 		padding: '15px',
-		marginBottom: '10px'
-	},
-	input: {
-		marginLeft: 20,
-		border: '1px solid grey',
-		borderRadius: 5,
-		height: 20,
-		width: 300
-
+		marginBottom: '10px',
 	},
 	button: {
 		borderRadius: 5,
@@ -28,16 +21,39 @@ const styles = {
 }
 
 
-const AddTodo = (props) => {
+const AddTodoForm = (props) => {
+
 	return (
-		<form onSubmit={props.handleSubmit} style={styles.div}>
-			<Field component='input' style={styles.input} type="text" name="task" validate={required} />
+		<form onSubmit={props.handleSubmit} >
+			<Field component={Input} type="text" name="task" validate={[required]} placeholder='Добавь задачу' autoFocus={true} />
 			<button style={styles.button}>Добавить</button>
 		</form>
 
 	)
 }
 
-const AddTodoFormRedux = reduxForm({ form: 'addTodo' })(AddTodo)
+const afterSubmit = (result, dispatch) => {
+	dispatch(reset('addTodo'))
+}
 
-export default AddTodoFormRedux;
+
+const AddTodoFormRedux = reduxForm({
+	form: 'addTodo',
+	onSubmitSuccess: afterSubmit,
+})(AddTodoForm)
+
+const AddTodo = (props) => {
+
+	const onSubmit = (formData) => {
+		props.addTask(formData.task)
+	}
+
+	return (
+		<div>
+			<AddTodoFormRedux onSubmit={onSubmit} />
+		</div>
+	)
+}
+
+
+export default AddTodo;

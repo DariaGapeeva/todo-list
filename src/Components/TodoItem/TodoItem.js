@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 
 
 const styles = {
@@ -23,6 +23,10 @@ const styles = {
 }
 
 const TodoItem = (props) => {
+	//  [] = useState('')
+
+
+
 	return (<div>
 		<li style={styles.li}>
 			<span>{props.id}<input style={styles.input} type='checkbox' checked={props.todos.done} onChange={() => props.checked(props.todos.id)} /> <span style={props.todos.done ? { textDecoration: 'line-through' } : { textDecoration: 'none' }} >{props.todos.task} </span>  </span>

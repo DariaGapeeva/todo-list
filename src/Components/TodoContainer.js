@@ -3,7 +3,7 @@ import Todo from './Todo';
 import { addTaskAC, deleteTaskAC, checkedAC } from '../redux/redusers'
 
 
-const mapStatetoProps = (state) => {
+const mapStateToProps = (state) => {
 	return {
 		todos: state.todoList.todos
 	}
@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-const TodoContainer = connect(mapStatetoProps, mapDispatchToProps)(Todo)
+const TodoContainer = connect(mapStateToProps, mapDispatchToProps)(Todo)
 
 
 export default TodoContainer;
