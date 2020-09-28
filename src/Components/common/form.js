@@ -28,7 +28,7 @@ export const Input = ({ input, type, meta, placeholder, autoFocus }) => {
 			borderRadius: 5,
 			height: 20,
 			width: 300,
-			outline: 'none'
+			outline: 'none',
 		}
 	}
 

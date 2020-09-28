@@ -27,7 +27,7 @@ const styles = {
 
 	},
 	navbar: {
-		flex: '1 1 20%',
+		flex: '1 1 30%',
 		maxWidth: '20%',
 		border: '1px solid green',
 		backgroundColor: 'lavender',
@@ -36,13 +36,12 @@ const styles = {
 }
 
 function App() {
+
+
+
 	return (
+
 		<div style={styles.wrapper}>
-			{/* <h1 style={styles.h1}>Список дел</h1>
-			<TodoContainer />
-					<Week /> */}
-
-
 			<div style={styles.content}>
 				<h1 style={styles.h1}>Список дел</h1>
 				<Switch>
@@ -60,6 +59,7 @@ function App() {
 				<Navbar />
 			</div>
 		</div>
+
 	);
 }
 
