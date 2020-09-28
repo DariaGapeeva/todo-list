@@ -7,7 +7,9 @@ export const Input = ({ input, type, meta, placeholder, autoFocus }) => {
 	const styles = {
 		box: {
 			position: 'relative',
-			border: !hasError ? '1px solid green' : '1px solid red',
+			// border: !hasError ? '1px solid green' : '1px solid red',
+
+			border: '1px solid green',
 			borderRadius: 5,
 			padding: '15px',
 			marginBottom: '10px',

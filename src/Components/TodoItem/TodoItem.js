@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 
 
 const styles = {
@@ -12,8 +12,14 @@ const styles = {
 		padding: '15px',
 		marginBottom: '10px'
 	},
+	number: {
+		marginLeft:5
+	},
+
 	input: {
-		marginLeft: 20
+		marginLeft: 10,
+		marginRight: 10
+
 	},
 	button: {
 		borderRadius: 5,
@@ -27,11 +33,15 @@ const TodoItem = (props) => {
 
 
 
-	return (<div>
+	return (
 		<li style={styles.li}>
-			<span>{props.id}<input style={styles.input} type='checkbox' checked={props.todos.done} onChange={() => props.checked(props.todos.id)} /> <span style={props.todos.done ? { textDecoration: 'line-through' } : { textDecoration: 'none' }} >{props.todos.task} </span>  </span>
-			<button style={styles.button} onClick={() => props.deleteTask(props.todos.id)} >&times;</button></li>
-	</div >
+			<span style={styles.number}> {props.number}
+			<input style={styles.input} type='checkbox' checked={props.todos.done} onChange={() => props.checked(props.todos.id)} /> 
+			<span style={props.todos.done ? { textDecoration: 'line-through' } : { textDecoration: 'none' }} >{props.todos.task} </span> 
+			</span>
+			<button style={styles.button} onClick={() => props.deleteTask(props.todos.id)} >&times;</button>
+		</li>
+	
 	)
 
 }

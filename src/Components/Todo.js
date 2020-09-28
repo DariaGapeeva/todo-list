@@ -12,16 +12,18 @@ const styles = {
 }
 
 const Todo = (props) => {
-
+let array = props.todos.filter(item => item.day === props.day);
 	return (
 		<div>
+
+			<h3>{props.day} </h3>
 			<ol style={styles.ol}>
-				{props.todos.map(item => (
-					<TodoItem key={item.id} id={props.todos.indexOf(item) + 1} todos={item} deleteTask={props.deleteTask} checked={props.checked} />
+				{array.map(item => (
+					<TodoItem key={item.id}  number={array.indexOf(item) + 1 }  todos={item} deleteTask={props.deleteTask} checked={props.checked} />  
 				))}
 			</ol>
 
-			<AddTodo addTask={props.addTask} />
+			<AddTodo addTask={props.addTask} day={props.day} />
 		</div>
 	)
 }

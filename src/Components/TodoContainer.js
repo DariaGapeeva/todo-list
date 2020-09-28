@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Todo from './Todo';
-import { addTaskAC, deleteTaskAC, checkedAC } from '../redux/redusers'
+import { addTaskAC, deleteTaskAC, checkedAC } from '../redux/todoReduser'
 
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		addTask: (task) => (dispatch(addTaskAC(task))),
+		addTask: (task, day) => (dispatch(addTaskAC(task, day))),
 		deleteTask: (id) => (dispatch(deleteTaskAC(id))),
 		checked: (id) => (dispatch(checkedAC(id))),
 
@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-const TodoContainer = connect(mapStateToProps, mapDispatchToProps)(Todo)
 
 
-export default TodoContainer;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todo)

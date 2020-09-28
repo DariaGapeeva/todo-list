@@ -45,7 +45,7 @@ const AddTodoFormRedux = reduxForm({
 const AddTodo = (props) => {
 
 	const onSubmit = (formData) => {
-		props.addTask(formData.task)
+		props.addTask(formData.task, props.day)
 	}
 
 	return (
