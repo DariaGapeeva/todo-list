@@ -21,6 +21,8 @@ border-radius: 8px;
 margin-bottom: 15px;
 margin-top: 15px;
 padding: 20px;
+transition: background-color 0.2s ease;
+background-color: ${props => (props.isDraggingOver ? 'Gainsboro' : 'lavender')}
 `
 
 
@@ -35,15 +37,16 @@ const DayTodo = (props) => {
 		<Droppable
 			droppableId={props.day}
 		>
-			{ (provided) => (
+			{ (provided, snapshot) => (
 				<TaskList
 					{...provided.droppableProps}
 					ref={provided.innerRef}
+					isDraggingOver={snapshot.isDraggingOver}
 				>
 					{/* <ol> */}
 					{/* {array.map(item => <li key={item.id}> <span style={item.done ? { textDecoration: 'line-through' } : { textDecoration: 'none' }}> {item.task} </span></li>)} */}
 					{array.map((item, index) => <TodoItemWeek
-						key={item.id} done={item.done} task={item.task} id={item.id} index={index}
+						key={item.id} done={item.done} task={item.task} id={item.id} index={item.index}
 
 					/>)}
 					{provided.placeholder}

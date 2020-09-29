@@ -1,4 +1,3 @@
-import React from 'react';
 import DayTodo from './DayTodo';
 import { connect } from 'react-redux';
 

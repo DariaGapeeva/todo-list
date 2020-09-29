@@ -17,7 +17,7 @@ padding: 3px;
 margin-bottom: 8px;
 border-radius: 5px;
 outline:none;
-background-color: lavender;
+background-color: ${props => (props.isDragging ? 'AliceBlue' : 'lavender')};
 `;
 
 const TodoItemWeek = (props) => {
@@ -26,11 +26,12 @@ const TodoItemWeek = (props) => {
 			draggableId={props.id}
 			index={props.index}
 		>
-			{(provided) => (
+			{(provided, snapshot) => (
 				<Container
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
 					ref={provided.innerRef}
+					isDragging={snapshot.isDragging}
 				>
 					<span style={props.done ? { textDecoration: 'line-through' } : { textDecoration: 'none' }}> {props.task} </span>
 

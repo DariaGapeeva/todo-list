@@ -25,7 +25,7 @@ const styles = {
 
 }
 
-const Navbar = () => {
+const Navbar = (props) => {
 
 	const onDragEnd = (result) => {
 
@@ -42,6 +42,7 @@ const Navbar = () => {
 			return
 		}
 
+		props.moveTask(source.droppableId, source.index, destination.droppableId, destination.index);
 
 
 	}
@@ -54,49 +55,33 @@ const Navbar = () => {
 			<div styles={styles.navbar}>
 				<div styles={styles.navbarItem}>
 					<NavLink to='/monday' activeClassName={styles.active} style={styles.link}> Понедельник </NavLink>
-					{/* <Droppable
-						droppableId='Понедельник'
-					>
-						{(provided) => (
-							<DayTodoContainer
-								innerRef={provided.innerRef}
-								{...provided.droppableProps}
-								{...provided.droppablePlaceholder}
-								style={styles.item}
-								day='Понедельник'
 
-							>
-							
-							</DayTodoContainer>
-						)
-						}
-					</Droppable> */}
 					<DayTodoContainer id='1' style={styles.item} day='Понедельник' />
 
 				</div>
 				<div styles={styles.navbarItem}>
 					<NavLink to='/tuesday' activeClassName={styles.active} style={styles.link}> Вторник </NavLink>
-					<DayTodoContainer id='Вторник' style={styles.item} day='Вторник' />
+					<DayTodoContainer id='2' style={styles.item} day='Вторник' />
 				</div>
 				<div styles={styles.navbarItem}>
 					<NavLink to='/wednesday' activeClassName={styles.active} style={styles.link}> Среда </NavLink>
-					<DayTodoContainer id='Среда' style={styles.item} day='Среда' />
+					<DayTodoContainer id='3' style={styles.item} day='Среда' />
 				</div>
 				<div styles={styles.navbarItem}>
 					<NavLink to='/thursday' activeClassName={styles.active} style={styles.link}> Четверг </NavLink>
-					<DayTodoContainer id='Четверг' style={styles.item} day='Четверг' />
+					<DayTodoContainer id='4' style={styles.item} day='Четверг' />
 				</div>
 				<div styles={styles.navbarItem}>
 					<NavLink to='/friday' activeClassName={styles.active} style={styles.link}> Пятница </NavLink>
-					<DayTodoContainer id='Пятница' style={styles.item} day='Пятница' />
+					<DayTodoContainer id='5' style={styles.item} day='Пятница' />
 				</div>
 				<div styles={styles.navbarItem}>
 					<NavLink to='/saturday' activeClassName={styles.active} style={styles.link}> Суббота </NavLink>
-					<DayTodoContainer id='Суббота' style={styles.item} day='Суббота' />
+					<DayTodoContainer id='6' style={styles.item} day='Суббота' />
 				</div>
 				<div styles={styles.navbarItem}>
 					<NavLink to='/sunday' activeClassName={styles.active} style={styles.link}> Воскресенье </NavLink>
-					<DayTodoContainer id='Воскресенье' style={styles.item} day='Воскресенье' />
+					<DayTodoContainer id='7' style={styles.item} day='Воскресенье' />
 				</div>
 			</div>
 		</DragDropContext>

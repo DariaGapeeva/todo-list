@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import Navbar from './Components/Navbar/Navbar';
+import NavbarContainer from './Components/Navbar/NavbarContainer';
 import TodoContainer from './Components/TodoContainer';
-import Week from './Components/Week/Week';
 
 
 
@@ -56,7 +55,7 @@ function App() {
 				</Switch>
 			</div>
 			<div style={styles.navbar}>
-				<Navbar />
+				<NavbarContainer />
 			</div>
 		</div>
 
