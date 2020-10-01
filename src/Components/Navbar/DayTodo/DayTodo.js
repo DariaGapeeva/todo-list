@@ -36,6 +36,7 @@ const DayTodo = (props) => {
 	return (
 		<Droppable
 			droppableId={props.day}
+
 		>
 			{ (provided, snapshot) => (
 				<TaskList

@@ -54,33 +54,33 @@ const Navbar = (props) => {
 		>
 			<div styles={styles.navbar}>
 				<div styles={styles.navbarItem}>
-					<NavLink to='/monday' activeClassName={styles.active} style={styles.link}> Понедельник </NavLink>
+					<NavLink to='/monday' style={styles.link}> Понедельник </NavLink>
 
 					<DayTodoContainer id='1' style={styles.item} day='Понедельник' />
 
 				</div>
 				<div styles={styles.navbarItem}>
-					<NavLink to='/tuesday' activeClassName={styles.active} style={styles.link}> Вторник </NavLink>
+					<NavLink to='/tuesday' style={styles.link}> Вторник </NavLink>
 					<DayTodoContainer id='2' style={styles.item} day='Вторник' />
 				</div>
 				<div styles={styles.navbarItem}>
-					<NavLink to='/wednesday' activeClassName={styles.active} style={styles.link}> Среда </NavLink>
+					<NavLink to='/wednesday' style={styles.link}> Среда </NavLink>
 					<DayTodoContainer id='3' style={styles.item} day='Среда' />
 				</div>
 				<div styles={styles.navbarItem}>
-					<NavLink to='/thursday' activeClassName={styles.active} style={styles.link}> Четверг </NavLink>
+					<NavLink to='/thursday' style={styles.link}> Четверг </NavLink>
 					<DayTodoContainer id='4' style={styles.item} day='Четверг' />
 				</div>
 				<div styles={styles.navbarItem}>
-					<NavLink to='/friday' activeClassName={styles.active} style={styles.link}> Пятница </NavLink>
+					<NavLink to='/friday' style={styles.link}> Пятница </NavLink>
 					<DayTodoContainer id='5' style={styles.item} day='Пятница' />
 				</div>
 				<div styles={styles.navbarItem}>
-					<NavLink to='/saturday' activeClassName={styles.active} style={styles.link}> Суббота </NavLink>
+					<NavLink to='/saturday' style={styles.link}> Суббота </NavLink>
 					<DayTodoContainer id='6' style={styles.item} day='Суббота' />
 				</div>
 				<div styles={styles.navbarItem}>
-					<NavLink to='/sunday' activeClassName={styles.active} style={styles.link}> Воскресенье </NavLink>
+					<NavLink to='/sunday' style={styles.link}> Воскресенье </NavLink>
 					<DayTodoContainer id='7' style={styles.item} day='Воскресенье' />
 				</div>
 			</div>

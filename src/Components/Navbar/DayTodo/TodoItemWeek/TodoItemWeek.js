@@ -25,6 +25,7 @@ const TodoItemWeek = (props) => {
 		<Draggable
 			draggableId={props.id}
 			index={props.index}
+			key={props.id}
 		>
 			{(provided, snapshot) => (
 				<Container

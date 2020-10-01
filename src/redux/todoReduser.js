@@ -55,21 +55,47 @@ export const todoReduser = (state = initialState, action) => {
 			}
 		}
 		case MOVE_TASK: {
-			// let taskSource = state.todos[action.sourceId - 1].task;
-			let taskSource = state.todos.find(item => item.index === action.sourceIndex).task;
-			// let taskDestination = state.todos[action.destinationId - 1].task;
-			let taskDestination = state.todos.find(item => item.index === action.destinationIndex).task;
-			return {
-				...state,
-				todos: state.todos.map(item => {
-					if (item.index === action.sourceIndex) {
-						return { ...item, day: action.destinationId, task: taskDestination }
-					} else if (item.index === action.destinationIndex) {
-						return { ...item, day: action.sourceId, task: taskSource }
-					} else { return item }
-				})
 
-			}
+			// let taskSource = state.todos.find(item => item.index === action.sourceIndex).task;
+
+			// let taskDestination = state.todos.find(item => item.index === action.destinationIndex).task;
+			// return {
+			// 	...state,
+			// 	todos: state.todos.map(item => {
+			// 		if (item.index === action.sourceIndex) {
+			// 			return { ...item, day: action.destinationId, task: taskDestination }
+			// 		} else if (item.index === action.destinationIndex) {
+			// 			return { ...item, day: action.sourceId, task: taskSource }
+			// 		} else { return item }
+			// 	})
+
+			// }
+
+			let itemSource = state.todos.find(item => item.index === action.sourceIndex);
+			// itemSource.day = action.destinationId;
+			let newState = {
+				...state,
+				todos: [...state.todos]
+
+			};
+
+			let indexSource = state.todos.findIndex(item => item.index === action.sourceIndex);
+			let indexDestination = state.todos.findIndex(item => item.index === action.destinationIndex);
+
+
+			newState.todos.splice(indexSource, 1);
+			newState.todos.splice(indexDestination, 0, { ...itemSource, day: action.destinationId });
+
+			newState.todos.map((item, index) => {
+				item.index = index + 1;
+				// item.id = String(index + 1);
+			});
+
+
+			return newState;
+
+
+
 		}
 
 		default: return state
