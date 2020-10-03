@@ -21,7 +21,7 @@ const Number = styled.span`
 
 const Input = styled.input`
 		margin-left: 10px;
-		margin-right: 10;
+		margin-right: 10px;
 `;
 
 const Button = styled.button`

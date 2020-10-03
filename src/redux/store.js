@@ -1,10 +1,10 @@
 import { createStore, combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+// import { reducer as formReducer } from 'redux-form';
 import { todoReduser } from './todoReduser'
 
 let redusers = combineReducers({
 	todoList: todoReduser,
-	form: formReducer
+	// form: formReducer
 })
 
 let store = createStore(redusers,

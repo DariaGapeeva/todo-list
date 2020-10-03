@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TodoItem from '../TodoItem/TodoItem';
-import AddTodo from '../AddTodo/AddTodo';
+import AddTodoForm from '../AddTodo/AddTodoForm';
 import styled from 'styled-components';
 
 const List = styled.div`
 		padding:0;
 `;
+
+const TaskNo = styled.div`
+		margin-bottom: 10px;
+		`;
+
 
 const Todo = (props) => {
 	let array = props.todos.filter(item => item.day === props.day);
@@ -14,12 +19,12 @@ const Todo = (props) => {
 		<div>
 			<h3>{props.day} </h3>
 			<List>
-				{array.length === 0 ? 'задач нет' : array.map((item, index) => (
+				{array.length === 0 ? <TaskNo>задач нет</TaskNo> : array.map((item, index) => (
 					<TodoItem key={item.id} number={index + 1} todos={item} deleteTask={props.deleteTask} checked={props.checked} />
 				))}
 			</List>
 
-			<AddTodo addTask={props.addTask} day={props.day} />
+			<AddTodoForm addTask={props.addTask} day={props.day} />
 		</div>
 	)
 }
