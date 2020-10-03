@@ -2,89 +2,97 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import DayTodoContainer from './DayTodo/DayTodoContainer';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { Droppable } from 'react-beautiful-dnd';
+import styled from 'styled-components';
 
-const styles = {
-	navbar: {
-		display: 'flex',
-	},
-	navbarItem: {
+const LinkElem = styled(NavLink)`
+		text-decoration: none;
+		color: black;
+		font-weight: 600;
+		font-size: 1.3rem;
+		margin-bottom: 15px;
+		&:hover {
+			color:green;
+		};
+		&.active {
+			color:green;
+		}
+`;
 
-	},
-	link: {
-		textDecoration: 'none',
-		color: 'black',
-		fontWeight: '600',
-		marginBottom: 15
-	},
+const Content = styled.div`
+		display: flex ;
+		justify-content: space-between;	
+		flex-wrap: wrap;
+`;
 
-	active: {
-		color: 'grey',
-	},
-
-
-}
+const Item = styled.div`
+		flex: 0 1 45%;
+`;
 
 const Navbar = (props) => {
 
+	const onDragStart = () => {
+
+	}
+
 	const onDragEnd = (result) => {
 
-		const { destination, source, draggableId } = result;
+		const { destination, source } = result;
 
 		if (!destination) {
 			return;
 		};
 
-		if (
-			destination.droppableId === source.droppableId &&
+		if (destination.droppableId === source.droppableId &&
 			destination.index === source.index
 		) {
-			return
+			return;
 		}
 
-		props.moveTask(source.droppableId, source.index, destination.droppableId, destination.index);
-
+		if (destination.droppableId === source.droppableId) {
+			props.moveTaskInSameColumn(source.index, destination.index);
+		} else if (destination.droppableId !== source.droppableId) {
+			props.moveTaskInOtherColumn(source.index, destination.index, destination.droppableId);
+		}
 
 	}
 
 
 	return (
 		<DragDropContext
+			onDragStart={onDragStart}
 			onDragEnd={onDragEnd}
 		>
-			<div styles={styles.navbar}>
-				<div styles={styles.navbarItem}>
-					<NavLink to='/monday' style={styles.link}> Понедельник </NavLink>
-
-					<DayTodoContainer id='1' style={styles.item} day='Понедельник' />
-
-				</div>
-				<div styles={styles.navbarItem}>
-					<NavLink to='/tuesday' style={styles.link}> Вторник </NavLink>
-					<DayTodoContainer id='2' style={styles.item} day='Вторник' />
-				</div>
-				<div styles={styles.navbarItem}>
-					<NavLink to='/wednesday' style={styles.link}> Среда </NavLink>
-					<DayTodoContainer id='3' style={styles.item} day='Среда' />
-				</div>
-				<div styles={styles.navbarItem}>
-					<NavLink to='/thursday' style={styles.link}> Четверг </NavLink>
-					<DayTodoContainer id='4' style={styles.item} day='Четверг' />
-				</div>
-				<div styles={styles.navbarItem}>
-					<NavLink to='/friday' style={styles.link}> Пятница </NavLink>
-					<DayTodoContainer id='5' style={styles.item} day='Пятница' />
-				</div>
-				<div styles={styles.navbarItem}>
-					<NavLink to='/saturday' style={styles.link}> Суббота </NavLink>
-					<DayTodoContainer id='6' style={styles.item} day='Суббота' />
-				</div>
-				<div styles={styles.navbarItem}>
-					<NavLink to='/sunday' style={styles.link}> Воскресенье </NavLink>
-					<DayTodoContainer id='7' style={styles.item} day='Воскресенье' />
-				</div>
-			</div>
-		</DragDropContext>
+			<Content>
+				<Item>
+					<LinkElem to='/monday'> Понедельник </LinkElem>
+					<DayTodoContainer day='Понедельник' />
+				</Item>
+				<Item>
+					<LinkElem to='/tuesday'> Вторник </LinkElem>
+					<DayTodoContainer day='Вторник' />
+				</Item>
+				<Item>
+					<LinkElem to='/wednesday' > Среда </LinkElem>
+					<DayTodoContainer day='Среда' />
+				</Item>
+				<Item>
+					<LinkElem to='/thursday'> Четверг </LinkElem>
+					<DayTodoContainer day='Четверг' />
+				</Item>
+				<Item>
+					<LinkElem to='/friday'> Пятница </LinkElem>
+					<DayTodoContainer day='Пятница' />
+				</Item>
+				<Item>
+					<LinkElem to='/saturday'> Суббота </LinkElem>
+					<DayTodoContainer day='Суббота' />
+				</Item>
+				<Item>
+					<LinkElem to='/sunday'> Воскресенье </LinkElem>
+					<DayTodoContainer day='Воскресенье' />
+				</Item>
+			</Content>
+		</DragDropContext >
 	)
 }
 

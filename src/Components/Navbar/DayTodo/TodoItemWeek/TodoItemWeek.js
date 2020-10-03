@@ -2,16 +2,9 @@ import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
-// const styles = {
-// 	box: {
-// 		border: '1px solid green',
-// 		padding: 3,
-// 		marginBottom: 8,
-// 		borderRadius: 5
-// 	}
-// }
 
-const Container = styled.li`
+
+const Container = styled.div`
 border: 1px solid green;
 padding: 3px;
 margin-bottom: 8px;
@@ -20,7 +13,16 @@ outline:none;
 background-color: ${props => (props.isDragging ? 'AliceBlue' : 'lavender')};
 `;
 
+const Number = styled.span`
+   margin-right: 5px;
+`;
+
+const Task = styled.span`
+text-decoration: ${props => (props.done ? 'line-through' : 'none')};
+`;
+
 const TodoItemWeek = (props) => {
+
 	return (
 		<Draggable
 			draggableId={props.id}
@@ -33,9 +35,8 @@ const TodoItemWeek = (props) => {
 					{...provided.dragHandleProps}
 					ref={provided.innerRef}
 					isDragging={snapshot.isDragging}
-				>
-					<span style={props.done ? { textDecoration: 'line-through' } : { textDecoration: 'none' }}> {props.task} </span>
-
+				>   <Number> {props.idTaskInDay}. </Number>
+					<Task done={props.done}>  {props.task} </Task>
 				</Container>
 			)}
 		</Draggable>

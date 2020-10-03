@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { moveTaskAC } from '../../redux/todoReduser';
+import { moveTaskInSameColumnAC, moveTaskInOtherColumnAC } from '../../redux/todoReduser';
 import Navbar from './Navbar';
 
 
@@ -9,8 +9,8 @@ import Navbar from './Navbar';
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		moveTask: (sourceId, sourceIndex, destinationId, destinationIndex) => (dispatch(moveTaskAC(sourceId, sourceIndex, destinationId, destinationIndex))),
-
+		moveTaskInSameColumn: (sourceIndex, destinationIndex) => (dispatch(moveTaskInSameColumnAC(sourceIndex, destinationIndex))),
+		moveTaskInOtherColumn: (sourceIndex, destinationIndex, destinationId) => (dispatch(moveTaskInOtherColumnAC(sourceIndex, destinationIndex, destinationId))),
 	}
 }
 

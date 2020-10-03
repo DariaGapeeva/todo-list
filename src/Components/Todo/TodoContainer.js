@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Todo from './Todo';
-import { addTaskAC, deleteTaskAC, checkedAC } from '../redux/todoReduser'
+import { addTaskAC, deleteTaskAC, checkedAC } from '../../redux/todoReduser'
 
 
 const mapStateToProps = (state) => {

@@ -1,53 +1,47 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import styled from 'styled-components'
 
+const Task = styled.span`
+		text-decoration: ${props => (props.done ? 'line-through' : 'none')}
+`;
 
-const styles = {
-	li: {
-		display: 'flex',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		border: '1px solid green',
-		borderRadius: 5,
-		padding: '15px',
-		marginBottom: '10px'
-	},
-	number: {
-		marginLeft:5
-	},
+const Item = styled.li`
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border: 1px solid green;
+		border-radius: 5px;
+		padding: 15px;
+		margin-bottom: 10px;
+`;
 
-	input: {
-		marginLeft: 10,
-		marginRight: 10
+const Number = styled.span`
+		margin-left: 5px;
+`;
 
-	},
-	button: {
-		borderRadius: 5,
-		backgroundColor: 'lavender'
-	}
+const Input = styled.input`
+		margin-left: 10px;
+		margin-right: 10;
+`;
 
-}
+const Button = styled.button`
+		border-radius: 5px;
+		background-color: lavender;
+`;
 
 const TodoItem = (props) => {
-	//  [] = useState('')
-
-
 
 	return (
-		<li style={styles.li}>
-			<span style={styles.number}> {props.number}
-			<input style={styles.input} type='checkbox' checked={props.todos.done} onChange={() => props.checked(props.todos.id)} /> 
-			<span style={props.todos.done ? { textDecoration: 'line-through' } : { textDecoration: 'none' }} >{props.todos.task} </span> 
-			</span>
-			<button style={styles.button} onClick={() => props.deleteTask(props.todos.id)} >&times;</button>
-		</li>
-	
+		<Item>
+			<Number > {props.number}
+				<Input type='checkbox' checked={props.todos.done} onChange={() => props.checked(props.todos.id)} />
+				<Task> {props.todos.task}</Task>
+			</Number>
+			<Button onClick={() => props.deleteTask(props.todos.id)} >&times;</Button>
+		</Item>
+
 	)
 
 }
 
-TodoItem.propTypes = {
-	todos: PropTypes.object,
-	id: PropTypes.number
-}
 export default TodoItem;
