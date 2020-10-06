@@ -6,25 +6,36 @@ import Input from '../common/form';
 
 const StyledButton = styled.button`
 		border-radius: 5px;
-		background-color: lavender;	
-
-		
+		background-color: lavender;			
 `;
 
 
 
 const AddTodoForm = (props) => {
-	const { register, handleSubmit, reset } = useForm();
+	const { register, handleSubmit, reset, formState: { isSubmitSuccessful }
+	} = useForm({ defaultValues: { something: "anything" } });
+
+	const [submittedData] = React.useState({});
+
+
 	const onSubmit = data => {
 		props.addTask(data.task, props.day);
-		reset(data)
+
 	}
+	React.useEffect(() => {
+		if (isSubmitSuccessful) {
+			reset({ ...submittedData });
+		}
+	}, [isSubmitSuccessful, submittedData, reset]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} >
+
+
 			<Input register={register} required type="text"
 				label="task" placeholder='Добавь задачу' autoFocus={true} />
-			<StyledButton>Добавить</StyledButton>
+			<StyledButton
+			>Добавить</StyledButton>
 		</form>
 	)
 

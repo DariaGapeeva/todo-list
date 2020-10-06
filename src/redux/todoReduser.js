@@ -7,22 +7,22 @@ const MOVE_TASK_IN_OTHER_COLUMN = "MOVE_TASK_IN_OTHER_COLUMN";
 
 
 const initialState = {
-	todos: [{ id: '1', index: 0, day: 'Понедельник', task: 'Купить молоко', done: false },
-	{ id: '2', index: 1, day: 'Понедельник', task: 'Купить масло', done: false },
-	{ id: '3', index: 2, day: 'Понедельник', task: 'Помыть пол', done: false },
-	{ id: '4', index: 3, day: 'Вторник', task: 'Погулять в парке', done: false },
-	{ id: '5', index: 4, day: 'Вторник', task: 'Заплатить за телефон', done: false },
-	{ id: '6', index: 5, day: 'Вторник', task: 'Помыть шкаф', done: false },
-	{ id: '7', index: 6, day: 'Среда', task: 'Решить задачу', done: false },
-	{ id: '8', index: 7, day: 'Среда', task: 'Йога', done: false },
-	{ id: '9', index: 8, day: 'Четверг', task: 'Приготовить торт', done: false },
-	{ id: '10', index: 9, day: 'Четверг', task: 'Сходить в МФЦ', done: false },
-	{ id: '11', index: 10, day: 'Четверг', task: 'Постирать ковер', done: false },
-	{ id: '12', index: 11, day: 'Четверг', task: 'Купить тетради', done: false },
-	{ id: '13', index: 12, day: 'Пятница', task: 'Йога', done: false },
-	{ id: '14', index: 13, day: 'Суббота', task: 'Бассейн', done: false },
-	{ id: '15', index: 14, day: 'Воскресенье', task: 'Робототехника', done: false },
-	{ id: '16', index: 15, day: 'Воскресенье', task: 'Прогулка в лесу', done: false },
+	todos: [{ id: '1', index: 1, day: 'Понедельник', task: 'Купить молоко', done: false },
+	{ id: '2', index: 2, day: 'Понедельник', task: 'Купить масло', done: false },
+	{ id: '3', index: 3, day: 'Понедельник', task: 'Помыть пол', done: false },
+	{ id: '4', index: 4, day: 'Вторник', task: 'Погулять в парке', done: false },
+	{ id: '5', index: 5, day: 'Вторник', task: 'Заплатить за телефон', done: false },
+	{ id: '6', index: 6, day: 'Вторник', task: 'Помыть шкаф', done: false },
+	{ id: '7', index: 7, day: 'Среда', task: 'Решить задачу', done: false },
+	{ id: '8', index: 8, day: 'Среда', task: 'Йога', done: false },
+	{ id: '9', index: 9, day: 'Четверг', task: 'Приготовить торт', done: false },
+	{ id: '10', index: 10, day: 'Четверг', task: 'Сходить в МФЦ', done: false },
+	{ id: '11', index: 11, day: 'Четверг', task: 'Постирать ковер', done: false },
+	{ id: '12', index: 12, day: 'Четверг', task: 'Купить тетради', done: false },
+	{ id: '13', index: 13, day: 'Пятница', task: 'Йога', done: false },
+	{ id: '14', index: 14, day: 'Суббота', task: 'Бассейн', done: false },
+	{ id: '15', index: 15, day: 'Воскресенье', task: 'Робототехника', done: false },
+	{ id: '16', index: 16, day: 'Воскресенье', task: 'Прогулка в лесу', done: false },
 	]
 }
 
@@ -31,15 +31,22 @@ export const todoReduser = (state = initialState, action) => {
 		case ADD_TASK: {
 			let newTask = {
 				id: String(state.todos.length + 1),
-				index: state.todos.length,
+				index: state.todos.length + 1,
 				day: action.day,
 				task: action.task,
 				done: false
 			}
-			return {
+			let filterNewState = state.todos.filter(item => item.day === action.day);
+			let currentIndex = state.todos.indexOf(filterNewState[filterNewState.length - 1])
+
+			let newState = {
 				...state,
-				todos: [...state.todos, newTask]
+				todos: [...state.todos]
 			}
+			newState.todos.splice(currentIndex + 1, 0, newTask)
+			newState.todos.map((item, index) => item.index = index + 1);
+			newState.todos.map((item, index) => item.id = String(index + 1));
+			return newState;
 		}
 		case DELETE_TASK: {
 
@@ -71,7 +78,9 @@ export const todoReduser = (state = initialState, action) => {
 			newState.todos.splice(indexSource, 1);
 			newState.todos.splice(indexDestination, 0, itemSource);
 
-			newState.todos.map((item, index) => item.index = index);
+			// newState.todos.map((item, index) => ({ ...item, index: index + 1, id: String(index + 1) }));
+			newState.todos.map((item, index) => item.index = index + 1);
+			newState.todos.map((item, index) => item.id = String(index + 1));
 
 			return newState;
 		}
@@ -94,7 +103,9 @@ export const todoReduser = (state = initialState, action) => {
 
 			newState.todos.splice(indexDestination, 0, { ...itemSource, day: action.destinationId });
 
-			newState.todos.map((item, index) => item.index = index);
+			// newState.todos.map((item, index) => ({ ...item, index: index + 1, id: String(index + 1) }));
+			newState.todos.map((item, index) => item.index = index + 1);
+			newState.todos.map((item, index) => item.id = String(index + 1));
 
 			return newState;
 		}
