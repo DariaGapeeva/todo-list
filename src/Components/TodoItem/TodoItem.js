@@ -35,7 +35,7 @@ const TodoItem = (props) => {
 		<Item>
 			<Number > {props.number}
 				<Input type='checkbox' checked={props.todos.done} onChange={() => props.checked(props.todos.id)} />
-				<Task> {props.todos.task}</Task>
+				<Task done={props.todos.done}> {props.todos.task}</Task>
 			</Number>
 			<Button onClick={() => props.deleteTask(props.todos.id)} >&times;</Button>
 		</Item>
