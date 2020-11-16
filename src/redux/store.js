@@ -1,14 +1,17 @@
-import { createStore, combineReducers } from 'redux';
-// import { reducer as formReducer } from 'redux-form';
-import { todoReduser } from './todoReduser'
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import { todoReduser } from "./todoReduser";
 
 let redusers = combineReducers({
-	todoList: todoReduser,
-	// form: formReducer
-})
+  todoList: todoReduser,
+});
 
-let store = createStore(redusers,
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+let store = createStore(
+  redusers,
+  compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
 
 window.store = store;
