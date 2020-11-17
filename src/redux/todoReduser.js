@@ -13,77 +13,77 @@ const HIDE_LOADER_BUTTON = "HIDE_LOADER_BUTTON";
 
 const initialState = {
   todos: [
-    // {
-    //   id: "1",
-    //   day: "Понедельник",
-    //   task: "Купить молоко",
-    //   done: false,
-    // },
-    // {
-    //   id: "2",
-    //   day: "Понедельник",
-    //   task: "Купить масло",
-    //   done: false,
-    // },
-    // { id: "3", day: "Понедельник", task: "Помыть пол", done: false },
-    // {
-    //   id: "4",
-    //   day: "Вторник",
-    //   task: "Погулять в парке",
-    //   done: false,
-    // },
-    // {
-    //   id: "5",
-    //   day: "Вторник",
-    //   task: "Заплатить за телефон",
-    //   done: false,
-    // },
-    // { id: "6", day: "Вторник", task: "Помыть шкаф", done: false },
-    // { id: "7", day: "Среда", task: "Решить задачу", done: false },
-    // { id: "8", day: "Среда", task: "Йога", done: false },
-    // {
-    //   id: "9",
-    //   day: "Четверг",
-    //   task: "Приготовить торт",
-    //   done: false,
-    // },
-    // { id: "10", day: "Четверг", task: "Сходить в МФЦ", done: false },
-    // {
-    //   id: "11",
-    //   day: "Четверг",
-    //   task: "Постирать ковер",
-    //   done: false,
-    // },
-    // {
-    //   id: "12",
-    //   day: "Четверг",
-    //   task: "Купить тетради",
-    //   done: false,
-    // },
-    // {
-    //   id: "13",
-    //   day: "Пятница",
-    //   task: "Йога",
-    //   done: false,
-    // },
-    // {
-    //   id: "14",
-    //   day: "Суббота",
-    //   task: "Бассейн",
-    //   done: false,
-    // },
-    // {
-    //   id: "15",
-    //   day: "Воскресенье",
-    //   task: "Робототехника",
-    //   done: false,
-    // },
-    // {
-    //   id: "16",
-    //   day: "Воскресенье",
-    //   task: "Прогулка в лесу",
-    //   done: false,
-    // },
+    {
+      id: "1",
+      day: "Понедельник",
+      task: "Купить молоко",
+      done: false,
+    },
+    {
+      id: "2",
+      day: "Понедельник",
+      task: "Купить масло",
+      done: false,
+    },
+    { id: "3", day: "Понедельник", task: "Помыть пол", done: false },
+    {
+      id: "4",
+      day: "Вторник",
+      task: "Погулять в парке",
+      done: false,
+    },
+    {
+      id: "5",
+      day: "Вторник",
+      task: "Заплатить за телефон",
+      done: false,
+    },
+    { id: "6", day: "Вторник", task: "Помыть шкаф", done: false },
+    { id: "7", day: "Среда", task: "Решить задачу", done: false },
+    { id: "8", day: "Среда", task: "Йога", done: false },
+    {
+      id: "9",
+      day: "Четверг",
+      task: "Приготовить торт",
+      done: false,
+    },
+    { id: "10", day: "Четверг", task: "Сходить в МФЦ", done: false },
+    {
+      id: "11",
+      day: "Четверг",
+      task: "Постирать ковер",
+      done: false,
+    },
+    {
+      id: "12",
+      day: "Четверг",
+      task: "Купить тетради",
+      done: false,
+    },
+    {
+      id: "13",
+      day: "Пятница",
+      task: "Йога",
+      done: false,
+    },
+    {
+      id: "14",
+      day: "Суббота",
+      task: "Бассейн",
+      done: false,
+    },
+    {
+      id: "15",
+      day: "Воскресенье",
+      task: "Робототехника",
+      done: false,
+    },
+    {
+      id: "16",
+      day: "Воскресенье",
+      task: "Прогулка в лесу",
+      done: false,
+    },
   ],
   loading: false,
   loadingButton: false,
@@ -117,11 +117,34 @@ export const todoReduser = (state = initialState, action) => {
       };
     }
     case SET_TODOS: {
-      return {
+      const week = [
+        "Понедельник",
+        "Вторник",
+        "Среда",
+        "Четверг",
+        "Пятница",
+        "Суббота",
+        "Воскресенье",
+      ];
+      const newState = {
         ...state,
         todos: action.todos,
         loading: false,
       };
+      const array = week.map((day) =>
+        newState.todos.filter((item) => item.day === day)
+      );
+      newState.todos = [
+        ...array[0],
+        ...array[1],
+        ...array[2],
+        ...array[3],
+        ...array[4],
+        ...array[5],
+        ...array[6],
+      ];
+
+      return newState;
     }
     case ADD_TASK: {
       let newTask = {
@@ -285,8 +308,7 @@ export const deleteTodoThunk = (id) => {
   return async (dispatch) => {
     try {
       dispatch(showLoaderButton());
-      const response = await todoApi.deleteTodo(id);
-      console.log(response);
+      await todoApi.deleteTodo(id);
       dispatch(hideLoaderButton());
       dispatch(deleteTaskAC(id));
     } catch (e) {
@@ -298,8 +320,7 @@ export const deleteTodoThunk = (id) => {
 export const checkedTodoThunk = (id, done) => {
   return async (dispatch) => {
     try {
-      const response = await todoApi.checkedTodo(id, done);
-      console.log(response);
+      await todoApi.checkedTodo(id, done);
       dispatch(checkedAC(id));
     } catch (e) {
       alert(e.message);
@@ -318,7 +339,7 @@ export const moveTaskInOtherColumnThunk = (
       dispatch(
         moveTaskInOtherColumnAC(sourceIndex, destinationIndex, destinationId)
       );
-      const response = await todoApi.moveTodo(id, destinationId);
+      await todoApi.moveTodo(id, destinationId);
     } catch (e) {
       alert(e.message);
     }
