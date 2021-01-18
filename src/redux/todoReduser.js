@@ -1,3 +1,5 @@
+import { array } from "prop-types";
+import { sortedArray } from "../utilities/functions";
 import { todoApi } from "./../API/api";
 
 const ADD_TASK = "ADD_TASK";
@@ -13,77 +15,77 @@ const HIDE_LOADER_BUTTON = "HIDE_LOADER_BUTTON";
 
 const initialState = {
   todos: [
-    {
-      id: "1",
-      day: "Понедельник",
-      task: "Купить молоко",
-      done: false,
-    },
-    {
-      id: "2",
-      day: "Понедельник",
-      task: "Купить масло",
-      done: false,
-    },
-    { id: "3", day: "Понедельник", task: "Помыть пол", done: false },
-    {
-      id: "4",
-      day: "Вторник",
-      task: "Погулять в парке",
-      done: false,
-    },
-    {
-      id: "5",
-      day: "Вторник",
-      task: "Заплатить за телефон",
-      done: false,
-    },
-    { id: "6", day: "Вторник", task: "Помыть шкаф", done: false },
-    { id: "7", day: "Среда", task: "Решить задачу", done: false },
-    { id: "8", day: "Среда", task: "Йога", done: false },
-    {
-      id: "9",
-      day: "Четверг",
-      task: "Приготовить торт",
-      done: false,
-    },
-    { id: "10", day: "Четверг", task: "Сходить в МФЦ", done: false },
-    {
-      id: "11",
-      day: "Четверг",
-      task: "Постирать ковер",
-      done: false,
-    },
-    {
-      id: "12",
-      day: "Четверг",
-      task: "Купить тетради",
-      done: false,
-    },
-    {
-      id: "13",
-      day: "Пятница",
-      task: "Йога",
-      done: false,
-    },
-    {
-      id: "14",
-      day: "Суббота",
-      task: "Бассейн",
-      done: false,
-    },
-    {
-      id: "15",
-      day: "Воскресенье",
-      task: "Робототехника",
-      done: false,
-    },
-    {
-      id: "16",
-      day: "Воскресенье",
-      task: "Прогулка в лесу",
-      done: false,
-    },
+    //     {
+    //       id: "1",
+    //       day: "Понедельник",
+    //       task: "Купить молоко",
+    //       done: false,
+    //     },
+    //     {
+    //       id: "2",
+    //       day: "Понедельник",
+    //       task: "Купить масло",
+    //       done: false,
+    //     },
+    //     { id: "3", day: "Понедельник", task: "Помыть пол", done: false },
+    //     {
+    //       id: "4",
+    //       day: "Вторник",
+    //       task: "Погулять в парке",
+    //       done: false,
+    //     },
+    //     {
+    //       id: "5",
+    //       day: "Вторник",
+    //       task: "Заплатить за телефон",
+    //       done: false,
+    //     },
+    //     { id: "6", day: "Вторник", task: "Помыть шкаф", done: false },
+    //     { id: "7", day: "Среда", task: "Решить задачу", done: false },
+    //     { id: "8", day: "Среда", task: "Йога", done: false },
+    //     {
+    //       id: "9",
+    //       day: "Четверг",
+    //       task: "Приготовить торт",
+    //       done: false,
+    //     },
+    //     { id: "10", day: "Четверг", task: "Сходить в МФЦ", done: false },
+    //     {
+    //       id: "11",
+    //       day: "Четверг",
+    //       task: "Постирать ковер",
+    //       done: false,
+    //     },
+    //     {
+    //       id: "12",
+    //       day: "Четверг",
+    //       task: "Купить тетради",
+    //       done: false,
+    //     },
+    //     {
+    //       id: "13",
+    //       day: "Пятница",
+    //       task: "Йога",
+    //       done: false,
+    //     },
+    //     {
+    //       id: "14",
+    //       day: "Суббота",
+    //       task: "Бассейн",
+    //       done: false,
+    //     },
+    //     {
+    //       id: "15",
+    //       day: "Воскресенье",
+    //       task: "Робототехника",
+    //       done: false,
+    //     },
+    //     {
+    //       id: "16",
+    //       day: "Воскресенье",
+    //       task: "Прогулка в лесу",
+    //       done: false,
+    //     },
   ],
   loading: false,
   loadingButton: false,
@@ -117,32 +119,11 @@ export const todoReduser = (state = initialState, action) => {
       };
     }
     case SET_TODOS: {
-      const week = [
-        "Понедельник",
-        "Вторник",
-        "Среда",
-        "Четверг",
-        "Пятница",
-        "Суббота",
-        "Воскресенье",
-      ];
       const newState = {
         ...state,
         todos: action.todos,
         loading: false,
       };
-      const array = week.map((day) =>
-        newState.todos.filter((item) => item.day === day)
-      );
-      newState.todos = [
-        ...array[0],
-        ...array[1],
-        ...array[2],
-        ...array[3],
-        ...array[4],
-        ...array[5],
-        ...array[6],
-      ];
 
       return newState;
     }
@@ -152,6 +133,7 @@ export const todoReduser = (state = initialState, action) => {
         day: action.day,
         task: action.task,
         done: action.done,
+        index: state.todos.filter((item) => item.day === action.day).length,
       };
       let filterNewState = state.todos.filter(
         (item) => item.day === action.day
@@ -184,7 +166,7 @@ export const todoReduser = (state = initialState, action) => {
     }
     case MOVE_TASK_IN_SAME_COLUMN: {
       let itemSource = state.todos.find(
-        (item, index) => index === action.sourceIndex
+        (item) => item.id === action.draggableId
       );
 
       let newState = {
@@ -192,21 +174,14 @@ export const todoReduser = (state = initialState, action) => {
         todos: [...state.todos],
       };
 
-      let indexSource = state.todos.findIndex(
-        (item, index) => index === action.sourceIndex
-      );
-      let indexDestination = state.todos.findIndex(
-        (item, index) => index === action.destinationIndex
-      );
-
-      newState.todos.splice(indexSource, 1);
-      newState.todos.splice(indexDestination, 0, itemSource);
+      newState.todos.splice(action.sourceIndex, 1);
+      newState.todos.splice(action.destinationIndex, 0, itemSource);
 
       return newState;
     }
     case MOVE_TASK_IN_OTHER_COLUMN: {
       let itemSource = state.todos.find(
-        (item, index) => index === action.sourceIndex
+        (item) => item.id === action.draggableId
       );
 
       let newState = {
@@ -214,19 +189,15 @@ export const todoReduser = (state = initialState, action) => {
         todos: [...state.todos],
       };
 
-      let indexSource = state.todos.findIndex(
-        (item, index) => index === action.sourceIndex
-      );
-      let indexDestination = state.todos.findIndex(
-        (item, index) => index === action.destinationIndex
-      );
-      newState.todos.splice(indexSource, 1);
+      newState.todos.splice(action.sourceIndex, 1);
 
-      if (indexSource < indexDestination) {
-        indexDestination--;
+      let destinationIndex = action.destinationIndex;
+
+      if (action.sourceIndex < action.destinationIndex) {
+        destinationIndex = destinationIndex - 1;
       }
 
-      newState.todos.splice(indexDestination, 0, {
+      newState.todos.splice(destinationIndex, 0, {
         ...itemSource,
         day: action.destinationId,
       });
@@ -245,39 +216,49 @@ const showLoaderButton = () => ({ type: SHOW_LOADER_BUTTON });
 const hideLoaderButton = () => ({ type: HIDE_LOADER_BUTTON });
 
 const setTodosAC = (todos) => ({ type: SET_TODOS, todos });
+
 export const deleteTaskAC = (id) => ({ type: DELETE_TASK, id });
-const addTaskAC = (task, day, done, id) => ({
+
+const addTaskAC = (task, day, index, done, id) => ({
   type: ADD_TASK,
   task,
   day,
+  index,
   done,
   id,
 });
 export const checkedAC = (id) => ({ type: CHECKED, id });
-export const moveTaskInSameColumnAC = (sourceIndex, destinationIndex) => ({
+export const moveTaskInSameColumnAC = (
+  sourceIndex,
+  destinationIndex,
+  draggableId
+) => ({
   type: MOVE_TASK_IN_SAME_COLUMN,
   sourceIndex,
   destinationIndex,
+  draggableId,
 });
 export const moveTaskInOtherColumnAC = (
   sourceIndex,
   destinationIndex,
-  destinationId
+  destinationId,
+  draggableId
 ) => ({
   type: MOVE_TASK_IN_OTHER_COLUMN,
   sourceIndex,
   destinationIndex,
   destinationId,
+  draggableId,
 });
 
-export const addTaskThunk = (task, day, done) => {
+export const addTaskThunk = (task, day, indexNumber, done) => {
   return async (dispatch) => {
     try {
       dispatch(showLoaderButton());
-      const response = await todoApi.addTodo(task, day, done);
+      const response = await todoApi.addTodo(task, day, indexNumber, done);
 
       dispatch(hideLoaderButton());
-      dispatch(addTaskAC(task, day, done, response.data.name));
+      dispatch(addTaskAC(task, day, indexNumber, done, response.data.name));
     } catch (e) {
       alert(e.message);
     }
@@ -289,26 +270,23 @@ export const setTodosThunk = (todos) => {
     try {
       dispatch(showLoader());
       const response = await todoApi.getTodos();
-
-      if (response.data) {
-        const payload = Object.keys(response.data).map((key) => ({
-          ...response.data[key],
-          id: key,
-        }));
-        dispatch(hideLoader());
-        dispatch(setTodosAC(payload));
-      }
+      dispatch(hideLoader());
+      dispatch(setTodosAC(response));
     } catch (e) {
       alert(e.message);
     }
   };
 };
 
-export const deleteTodoThunk = (id) => {
+export const deleteTodoThunk = (id, day) => {
   return async (dispatch) => {
     try {
       dispatch(showLoaderButton());
       await todoApi.deleteTodo(id);
+      const response = await todoApi.getTodos();
+      await Promise.all([
+        ...response.map((item, index) => todoApi.reIndex(item.id, index)),
+      ]);
       dispatch(hideLoaderButton());
       dispatch(deleteTaskAC(id));
     } catch (e) {
@@ -328,18 +306,114 @@ export const checkedTodoThunk = (id, done) => {
   };
 };
 
-export const moveTaskInOtherColumnThunk = (
+export const moveTaskInSameColumnThunk = (
   sourceIndex,
   destinationIndex,
-  destinationId,
-  id
+  day,
+  draggableId
 ) => {
   return async (dispatch) => {
     try {
+      dispatch(showLoaderButton());
       dispatch(
-        moveTaskInOtherColumnAC(sourceIndex, destinationIndex, destinationId)
+        moveTaskInSameColumnAC(sourceIndex, destinationIndex, draggableId)
       );
-      await todoApi.moveTodo(id, destinationId);
+      const response = await todoApi.getTodos();
+
+      const sourceItem = response.find((item) => item.id === draggableId);
+      const destinationItem = response[destinationIndex];
+
+      const newArrayDay = sortedArray(response, day);
+      //   response
+      //     .filter((item) => item.day === day)
+      //     .sort((a, b) => (a.index > b.index ? 1 : -1));
+
+      let newSourceIndex = newArrayDay.indexOf(sourceItem);
+      let newDestinationIndex = newArrayDay.indexOf(destinationItem);
+
+      console.log("newSourceIndex", newSourceIndex);
+      console.log("newDestinationIndex", newDestinationIndex);
+
+      await Promise.all([
+        ...newArrayDay.map((item, index) => {
+          if (newSourceIndex < index && index <= newDestinationIndex) {
+            todoApi.reIndex(item.id, index - 1);
+          }
+
+          if (newDestinationIndex <= index && index < newSourceIndex) {
+            todoApi.reIndex(item.id, index + 1);
+          }
+        }),
+      ]);
+      await todoApi.reIndex(draggableId, newDestinationIndex);
+
+      dispatch(hideLoaderButton());
+    } catch (e) {
+      alert(e.message);
+    }
+  };
+};
+
+export const moveTaskInOtherColumnThunk = (
+  sourceIndex,
+  sourceId,
+  destinationIndex,
+  destinationId,
+  draggableId
+) => {
+  return async (dispatch) => {
+    try {
+      dispatch(showLoaderButton());
+      dispatch(
+        moveTaskInOtherColumnAC(
+          sourceIndex,
+          destinationIndex,
+          destinationId,
+          draggableId
+        )
+      );
+      const response = await todoApi.getTodos();
+
+      console.log(array, "array");
+      const sourceItem = response.find((item) => item.id === draggableId);
+      const destinationItem = response[destinationIndex];
+
+      const arraySource = sortedArray(response, sourceId);
+      //   response
+      //     .filter((item) => item.day === sourceId)
+      //     .sort((a, b) => (a.index > b.index ? 1 : -1));
+
+      const arrayDestination = sortedArray(response, destinationId);
+      //   response
+      //     .filter((item) => item.day === destinationId)
+      //     .sort((a, b) => (a.index > b.index ? 1 : -1));
+
+      let newSourceIndex = arraySource.indexOf(sourceItem);
+      let newDestinationIndex =
+        arrayDestination.indexOf(destinationItem) !== -1
+          ? arrayDestination.indexOf(destinationItem)
+          : arrayDestination.length;
+
+      console.log("newSourceIndex", newSourceIndex);
+      console.log("newDestinationIndex", newDestinationIndex);
+
+      await Promise.all([
+        ...arraySource.map((item, index) => {
+          if (index > newSourceIndex) {
+            todoApi.reIndex(item.id, index - 1);
+          }
+        }),
+        ...arrayDestination.map((item, index) => {
+          if (index >= newDestinationIndex) {
+            todoApi.reIndex(item.id, index + 1);
+          }
+        }),
+        todoApi.moveTodo(draggableId, destinationId),
+        todoApi.reIndex(draggableId, newDestinationIndex),
+      ]);
+      //   }
+
+      dispatch(hideLoaderButton());
     } catch (e) {
       alert(e.message);
     }

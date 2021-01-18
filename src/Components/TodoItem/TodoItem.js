@@ -37,12 +37,14 @@ const TodoItem = (props) => {
         {props.number}
         <Input
           type="checkbox"
-          checked={props.todos.done}
-          onChange={() => props.checked(props.todos.id, !props.todos.done)}
+          checked={props.todo.done}
+          onChange={() => props.checked(props.todo.id, !props.todo.done)}
         />
-        <Task done={props.todos.done}> {props.todos.task}</Task>
+        <Task done={props.todo.done}> {props.todo.task}</Task>
       </Number>
-      <Button onClick={() => props.deleteTask(props.todos.id)}>&times;</Button>
+      <Button onClick={() => props.deleteTask(props.todo.id, props.todo.day)}>
+        &times;
+      </Button>
     </Item>
   );
 };

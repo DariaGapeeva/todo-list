@@ -19,7 +19,7 @@ const AddTodoForm = (props) => {
   const [submittedData] = React.useState({});
 
   const onSubmit = (data) => {
-    props.addTask(data.task, props.day, false);
+    props.addTask(data.task, props.day, props.index, false);
   };
   React.useEffect(() => {
     if (isSubmitSuccessful) {

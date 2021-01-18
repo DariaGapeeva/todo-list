@@ -15,8 +15,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTask: (task, day, done) => dispatch(addTaskThunk(task, day, done)),
-    deleteTask: (id) => dispatch(deleteTodoThunk(id)),
+    addTask: (task, day, index, done, array) =>
+      dispatch(addTaskThunk(task, day, index, done, array)),
+    deleteTask: (id, array) => dispatch(deleteTodoThunk(id, array)),
     checked: (id, done) => dispatch(checkedTodoThunk(id, done)),
   };
 };

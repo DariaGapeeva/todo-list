@@ -35,6 +35,8 @@ const Navbar = ({ moveTaskInSameColumn, moveTaskInOtherColumn, loading }) => {
   const onDragEnd = (result) => {
     const { draggableId, destination, source } = result;
 
+    console.log("result", result);
+
     if (!destination) {
       return;
     }
@@ -47,10 +49,16 @@ const Navbar = ({ moveTaskInSameColumn, moveTaskInOtherColumn, loading }) => {
     }
 
     if (destination.droppableId === source.droppableId) {
-      moveTaskInSameColumn(source.index, destination.index);
+      moveTaskInSameColumn(
+        source.index,
+        destination.index,
+        source.droppableId,
+        draggableId
+      );
     } else if (destination.droppableId !== source.droppableId) {
       moveTaskInOtherColumn(
         source.index,
+        source.droppableId,
         destination.index,
         destination.droppableId,
         draggableId

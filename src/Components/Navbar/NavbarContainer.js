@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import {
-  moveTaskInSameColumnAC,
   moveTaskInOtherColumnThunk,
   setTodosThunk,
+  moveTaskInSameColumnThunk,
 } from "../../redux/todoReduser";
 import React, { useEffect } from "react";
 import Navbar from "./Navbar";
@@ -29,15 +29,29 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    moveTaskInSameColumn: (sourceIndex, destinationIndex) =>
-      dispatch(moveTaskInSameColumnAC(sourceIndex, destinationIndex)),
-    moveTaskInOtherColumn: (sourceIndex, destinationIndex, destinationId, id) =>
+    moveTaskInSameColumn: (sourceIndex, destinationIndex, day, draggableId) =>
+      dispatch(
+        moveTaskInSameColumnThunk(
+          sourceIndex,
+          destinationIndex,
+          day,
+          draggableId
+        )
+      ),
+    moveTaskInOtherColumn: (
+      sourceIndex,
+      sourceId,
+      destinationIndex,
+      destinationId,
+      draggableId
+    ) =>
       dispatch(
         moveTaskInOtherColumnThunk(
           sourceIndex,
+          sourceId,
           destinationIndex,
           destinationId,
-          id
+          draggableId
         )
       ),
     setTodos: () => dispatch(setTodosThunk()),

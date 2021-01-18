@@ -27,7 +27,7 @@ const Todo = (props) => {
             <TodoItem
               key={item.id}
               number={index + 1}
-              todos={item}
+              todo={item}
               deleteTask={props.deleteTask}
               checked={props.checked}
             />
@@ -35,7 +35,11 @@ const Todo = (props) => {
         )}
       </List>
 
-      <AddTodoForm addTask={props.addTask} day={props.day} />
+      <AddTodoForm
+        addTask={props.addTask}
+        day={props.day}
+        index={array.length}
+      />
     </div>
   );
 };

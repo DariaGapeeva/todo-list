@@ -1,1 +1,1 @@
-export const required = (formData) => (formData ? undefined : ' ')  
+export const required = (formData) => (formData ? undefined : " ");
