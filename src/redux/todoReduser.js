@@ -337,11 +337,11 @@ export const moveTaskInSameColumnThunk = (
       await Promise.all([
         ...newArrayDay.map((item, index) => {
           if (newSourceIndex < index && index <= newDestinationIndex) {
-            todoApi.reIndex(item.id, index - 1);
+            return todoApi.reIndex(item.id, index - 1);
           }
 
           if (newDestinationIndex <= index && index < newSourceIndex) {
-            todoApi.reIndex(item.id, index + 1);
+            return todoApi.reIndex(item.id, index + 1);
           }
         }),
       ]);
@@ -400,12 +400,12 @@ export const moveTaskInOtherColumnThunk = (
       await Promise.all([
         ...arraySource.map((item, index) => {
           if (index > newSourceIndex) {
-            todoApi.reIndex(item.id, index - 1);
+            return todoApi.reIndex(item.id, index - 1);
           }
         }),
         ...arrayDestination.map((item, index) => {
           if (index >= newDestinationIndex) {
-            todoApi.reIndex(item.id, index + 1);
+            return todoApi.reIndex(item.id, index + 1);
           }
         }),
         todoApi.moveTodo(draggableId, destinationId),

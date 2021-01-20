@@ -42,14 +42,15 @@ function App() {
           <h1>Список дел</h1>
           <Switch>
             <Route
+              path="/monday"
+              render={() => <TodoContainer day="Понедельник" />}
+            />
+            <Route
               exact
               path="/"
               render={() => <TodoContainer day="Понедельник" />}
             />
-            <Route
-              path="/monday"
-              render={() => <TodoContainer day="Понедельник" />}
-            />
+
             <Route
               path="/tuesday"
               render={() => <TodoContainer day="Вторник" />}
